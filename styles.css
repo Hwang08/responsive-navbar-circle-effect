@@ -1,0 +1,136 @@
+/* Removes default stylings */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+}
+
+nav{
+    height:10vh;
+    background: #5b78c7;
+}
+
+.nav-links{
+    /* Make's list items in a single row */
+    display: flex;
+    list-style: none;
+    /* Ul 50% of the nav */
+    width: 50%;
+    /* Ul 100% of the nav height */
+    height: 100%;
+    /* Horizontally aligns li */
+    justify-content: space-around;
+    /* Veritcally aligns li */
+    align-items: center;
+    /* Moves Ul to the right */
+    margin-left: auto;
+}
+
+.nav-links li a{
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+.landing{
+    /* 90 because of height:10vh; in the nav make 100 or full screen */
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landing h1{
+    margin: 100px;
+    font-size: 50px;
+    color: #ae5fce;
+}
+
+@media screen and (max-width: 768px){
+
+    /* Hamburger lines*/
+    .line{
+        width: 30px;
+        height: 3px;
+        background: white;
+        margin: 5px;
+    }
+    nav{
+        /*  */
+        position: relative;
+    }
+
+    .hamburger{
+        position: absolute;
+        /* Makes custom hamburger icon clickable */
+        cursor: pointer;
+        right: 5%;
+        /* This perfectly centers the hamburger vertically */
+        top: 50%;
+        transform: translate(-5%, -50%);
+        /* After the hamburger is clicked the mask covers the hamburger. This shows the hamburger on top of the mask after the hamburger is opened */
+        z-index: 2;
+    }
+
+    /* At 768px there is no longer links at the navbar */
+    .nav-links{
+        /* position is fixed so the page only shows the nav covering the screen */
+        position: fixed;
+        background: #5b78c7;
+        height: 100vh;
+        width: 100%;
+        /* Aligns li into a single column vertically */
+        flex-direction: column;
+        /* Mask animation */
+        /* Width of circle mask 100px, at 90% right -10% up Vertically towards nav*/
+        clip-path: circle(100px at 90% -23%);
+        /* For support across browsers */
+        -webkit-clip-path: circle(100px at 90% -23%);
+        /* Animates the circle mask */
+        transition: all 1s ease-out;
+        /* Prevents issues with clicking the nav links when hamburger is opened. Doesnt show pointer then below does*/
+        pointer-events: none;
+    }
+
+    /* When you click the hamburger it opens */
+    .nav-links.open{
+        /* Width of circle mask fills the screen from 100px to 1500px, at 90% right -10% up Vertically towards nav*/
+        clip-path: circle(1500px at 90% -23%);
+        /* For support across browsers */
+        -webkit-clip-path: circle(1500px at 90% -23%);
+        /* Prevents issues with clicking the nav links when hamburger is opened. Show's pointer*/
+        pointer-events: all;
+    }
+
+    .landing{
+        flex-direction: column;
+    }
+    
+    /* Fades in the nav links when the hamburger is clicked by slowly adding opacity from 0 to 1.*/
+    .nav-links li{
+        opacity: 0;
+    }
+
+    .nav-links li a{
+        font-size: 25px;
+    }
+
+    .nav-links li:nth-child(1){
+        transition: all 0.5s ease 0.2s;
+    }
+    .nav-links li:nth-child(2){
+        transition: all 0.5s ease 0.4s;
+    }
+    .nav-links li:nth-child(3){
+        transition: all 0.5s ease 0.6s;
+    }
+    /* Used in JS file */
+    li.fade{
+        opacity: 1;
+    }
+
+}
